@@ -1,0 +1,140 @@
+OFFICIAL NITO TV SOURCES FOR APPLE TV 4 JAILBREAK
+==================================================
+
+PRIMARY OFFICIAL SOURCES:
+https://nitosoft.com/atv/
+https://repo.nito.tv/
+
+INSTALLATION SCRIPT:
+http://nitosoft.com/ATV4/installNTV.sh
+
+==================================================
+JAILBREAK OPTIONS:
+==================================================
+
+CHECKRA1N (tvOS 12.0-13.2):
+https://checkra.in/
+https://checkra.in/releases/
+
+CHIMERATV (tvOS 12.0-12.4):
+https://chimera.coolstar.org/
+
+==================================================
+ADDITIONAL VERIFIED REPOSITORIES:
+==================================================
+
+For Checkra1n:
+- Official Nito TV: https://nitosoft.com/atv/ or https://repo.nito.tv/
+- BigBoss (Legacy): http://apt.thebigboss.org/repofiles/cydia/
+
+For Chimera/Sileo:
+- Official Nito TV: https://repo.nito.tv/
+- Sileo default sources (pre-configured)
+
+Community Repos:
+- GitHub Master List: https://github.com/mikekalaf/iOS-Jailbreak-Master-Repository
+  (Check "tvOS Repos" section)
+
+==================================================
+UPDATING NITO TV:
+==================================================
+
+Method 1 - Within Nito TV App:
+1. Launch Nito TV
+2. Go to Settings/Updates
+3. Refresh Sources
+4. Install available updates
+
+Method 2 - Via SSH:
+ssh root@your-apple-tv-ip
+apt-get update
+apt-get upgrade
+
+Method 3 - Reinstall:
+ssh root@your-apple-tv-ip
+curl -O http://nitosoft.com/ATV4/installNTV.sh
+chmod +x installNTV.sh
+./installNTV.sh
+
+==================================================
+SSL CERTIFICATE ERRORS (COMMON ISSUE):
+==================================================
+
+If you get "SSL certificate problem: unable to get local issuer certificate"
+
+FIX 1 - Edit apt sources to use HTTP:
+nano /etc/apt/sources.list.d/nito.list
+
+Change HTTPS to HTTP:
+  FROM: deb https://nitosoft.com/electra ./
+  TO:   deb http://nitosoft.com/electra ./
+
+  FROM: deb https://nito.tv/repo ./
+  TO:   deb http://nito.tv/repo ./
+
+Save (Ctrl+O, Enter, Ctrl+X) and run:
+apt-get update
+
+FIX 2 - For wget SSL errors, use curl or HTTP:
+curl -O http://nitosoft.com/ATV4/installNTV.sh
+OR
+wget http://nitosoft.com/ATV4/installNTV.sh
+
+FIX 3 - Try installing CA certificates:
+apt-get install ca-certificates --fix-missing
+
+==================================================
+TVOS 12.1.2 SPECIFIC FIXES:
+==================================================
+
+If checkra1n doesn't work on tvOS 12.1.2:
+1. Use USB-A to USB-C cable (NOT USB-C to USB-C)
+2. Download latest checkra1n 0.12.4+ from releases page
+3. Try ChimeraTV instead (better compatibility with 12.1.2)
+4. Connect directly without USB hubs
+5. Try different USB ports or computers
+
+==================================================
+DOCUMENTATION RESOURCES:
+==================================================
+
+Checkra1n Guides:
+https://ios.cfw.guide/installing-checkra1n-tv/
+https://ios.cfw.guide/installing-checkra1n-tv/macos/
+
+ChimeraTV Guide:
+https://ios.cfw.guide/installing-chimeratv/
+
+==================================================
+IMPORTANT SECURITY NOTES:
+==================================================
+
+1. ONLY use official Nito TV repositories listed above
+2. NEVER add unofficial mirrors or modified repositories
+3. Change default SSH password (alpine) immediately after jailbreak
+4. Keep checkra1n/ChimeraTV and Nito TV updated
+5. Only install packages from trusted developers
+6. Avoid piracy repositories
+
+==================================================
+VERIFIED COMPATIBILITY:
+==================================================
+
+Checkra1n:
+- Device: Apple TV 4 (HD) 4th Gen (A1625)
+- tvOS: 12.0 - 13.2
+- Note: tvOS 12.1.2 requires troubleshooting
+
+ChimeraTV:
+- Device: Apple TV 4 (HD) and Apple TV 4K
+- tvOS: 12.0 - 12.2 and 12.4
+- Better compatibility with tvOS 12.1.2
+
+==================================================
+
+For complete installation and update instructions, see:
+CHECKRA1N_NITOTV_GUIDE.md
+
+WARNING: Apple TV 4K 6th Gen has limited jailbreak support
+WARNING: Jailbreaking voids warranty and may violate TOS
+WARNING: Use only official sources to avoid malware
