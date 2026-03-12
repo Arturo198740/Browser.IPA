@@ -64,6 +64,13 @@ ssh root@your-apple-tv-ip
 apt-get update && apt-get upgrade
 ```
 
+**If you get SSL certificate errors**, use HTTP instead:
+```bash
+# Edit sources to use HTTP
+nano /etc/apt/sources.list.d/nito.list
+# Change https:// to http:// for all repos
+```
+
 See the [complete guide](CHECKRA1N_NITOTV_GUIDE.md#updating-nito-tv) for detailed instructions.
 
 ### Official Sources Only

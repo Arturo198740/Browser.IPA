@@ -264,10 +264,52 @@ chmod +x installNTV.sh
 
 ### Troubleshooting Updates
 
+**SSL Certificate Errors (Most Common Issue)**:
+
+If you see errors like `SSL certificate problem: unable to get local issuer certificate`:
+
+1. **Use HTTP instead of HTTPS** for apt sources:
+   ```bash
+   # Edit sources file
+   nano /etc/apt/sources.list.d/nito.list
+   ```
+
+   Change from:
+   ```
+   deb https://nitosoft.com/electra ./
+   deb https://nito.tv/repo ./
+   ```
+
+   To (using HTTP):
+   ```
+   deb http://nitosoft.com/electra ./
+   deb http://nito.tv/repo ./
+   ```
+
+   Save (Ctrl+O, Enter) and exit (Ctrl+X), then run:
+   ```bash
+   apt-get update
+   ```
+
+2. **Alternative: Install CA certificates** (if available):
+   ```bash
+   apt-get install ca-certificates --fix-missing
+   ```
+
+3. **For wget SSL issues**: Use curl or force HTTP:
+   ```bash
+   # Option 1: Use curl instead
+   curl -O http://nitosoft.com/ATV4/installNTV.sh
+
+   # Option 2: Download via HTTP (not HTTPS)
+   wget --no-check-certificate http://nitosoft.com/ATV4/installNTV.sh
+   ```
+
 **Update fails with "Unable to locate package"**:
 - Run `apt-get update` first to refresh repository lists
 - Check your internet connection
 - Verify repository sources are correctly configured
+- If SSL errors persist, use HTTP sources (see above)
 
 **Nito TV crashes after update**:
 - Reboot your Apple TV
@@ -277,6 +319,7 @@ chmod +x installNTV.sh
 - This is common with older Nito TV versions
 - Update Nito TV using Method 2 or 3
 - Add updated sources (see next section)
+- Check for SSL certificate errors (see above)
 
 ---
 
@@ -385,6 +428,63 @@ passwd
 ---
 
 ## Troubleshooting
+
+### SSL Certificate Errors with apt-get or wget
+
+**Problem**: Getting `SSL certificate problem: unable to get local issuer certificate` errors
+
+This is a very common issue on older jailbroken Apple TVs that don't have updated SSL certificates or lack proper SSL support.
+
+**Quick Fix - Use HTTP instead of HTTPS**:
+
+1. **For apt-get errors**, edit your sources file:
+   ```bash
+   nano /etc/apt/sources.list.d/nito.list
+   ```
+
+   Find lines like:
+   ```
+   deb https://nitosoft.com/electra ./
+   deb https://nito.tv/repo ./
+   ```
+
+   Change to HTTP (remove the 's' from https):
+   ```
+   deb http://nitosoft.com/electra ./
+   deb http://nito.tv/repo ./
+   ```
+
+   Save and exit (Ctrl+O, Enter, Ctrl+X), then:
+   ```bash
+   apt-get update
+   apt-get upgrade
+   ```
+
+2. **For wget SSL errors**, use one of these alternatives:
+   ```bash
+   # Best option: Use curl instead of wget
+   curl -O http://nitosoft.com/ATV4/installNTV.sh
+   chmod +x installNTV.sh
+   ./installNTV.sh
+   ```
+
+   Or if curl isn't available:
+   ```bash
+   # Force HTTP (not HTTPS) with wget
+   wget http://nitosoft.com/ATV4/installNTV.sh
+   chmod +x installNTV.sh
+   ./installNTV.sh
+   ```
+
+3. **Alternative: Try installing CA certificates** (may not work on all devices):
+   ```bash
+   apt-get install ca-certificates --fix-missing
+   ```
+
+**Why this happens**:
+- Older jailbroken Apple TVs may have outdated SSL certificates
+- Some versions of wget/curl on Apple TV were compiled without SSL support
+- Using HTTP instead of HTTPS works around this issue (repos support both)
 
 ### tvOS 12.1.2 Specific Issues with Checkra1n
 
@@ -546,6 +646,13 @@ Found an issue or have improvements? This guide is maintained for the Apple TV j
 ---
 
 ## Changelog
+
+### 2026-03-12 (Update 3)
+- Added comprehensive SSL certificate error troubleshooting
+- Included fixes for "unable to get local issuer certificate" errors
+- Added workarounds for wget without SSL support (use curl or HTTP)
+- Added instructions for editing apt sources to use HTTP instead of HTTPS
+- Documented why SSL errors occur on older jailbroken Apple TVs
 
 ### 2026-03-12 (Update 2)
 - Added ChimeraTV jailbreak option for tvOS 12.0-12.4

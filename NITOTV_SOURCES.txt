@@ -52,9 +52,36 @@ apt-get upgrade
 
 Method 3 - Reinstall:
 ssh root@your-apple-tv-ip
-wget http://nitosoft.com/ATV4/installNTV.sh
+curl -O http://nitosoft.com/ATV4/installNTV.sh
 chmod +x installNTV.sh
 ./installNTV.sh
+
+==================================================
+SSL CERTIFICATE ERRORS (COMMON ISSUE):
+==================================================
+
+If you get "SSL certificate problem: unable to get local issuer certificate"
+
+FIX 1 - Edit apt sources to use HTTP:
+nano /etc/apt/sources.list.d/nito.list
+
+Change HTTPS to HTTP:
+  FROM: deb https://nitosoft.com/electra ./
+  TO:   deb http://nitosoft.com/electra ./
+
+  FROM: deb https://nito.tv/repo ./
+  TO:   deb http://nito.tv/repo ./
+
+Save (Ctrl+O, Enter, Ctrl+X) and run:
+apt-get update
+
+FIX 2 - For wget SSL errors, use curl or HTTP:
+curl -O http://nitosoft.com/ATV4/installNTV.sh
+OR
+wget http://nitosoft.com/ATV4/installNTV.sh
+
+FIX 3 - Try installing CA certificates:
+apt-get install ca-certificates --fix-missing
 
 ==================================================
 TVOS 12.1.2 SPECIFIC FIXES:
