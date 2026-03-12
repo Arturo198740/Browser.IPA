@@ -4,7 +4,7 @@ Apple TV 4 Browser Applications and Jailbreak Resources
 
 ## Overview
 
-This repository contains browser IPA files for Apple TV 4 and comprehensive documentation for jailbreaking older Apple TV 4 devices with checkra1n and installing Nito TV.
+This repository contains browser IPA files for Apple TV 4 and comprehensive documentation for jailbreaking older Apple TV 4 devices with checkra1n or ChimeraTV, and installing/updating Nito TV.
 
 ## Contents
 
@@ -16,40 +16,90 @@ This repository contains browser IPA files for Apple TV 4 and comprehensive docu
 
 ### Documentation
 - **[CHECKRA1N_NITOTV_GUIDE.md](CHECKRA1N_NITOTV_GUIDE.md)** - Complete guide for:
-  - Jailbreaking Apple TV 4 with checkra1n
+  - Jailbreaking Apple TV 4 with checkra1n or ChimeraTV
   - Installing Nito TV package manager
-  - Official Nito TV sources and repositories
+  - **Updating Nito TV** (in-app and SSH methods)
+  - Official Nito TV sources and additional repositories
+  - **tvOS 12.1.2 compatibility fixes**
   - Security best practices
   - Troubleshooting common issues
 
+- **[NITOTV_SOURCES.txt](NITOTV_SOURCES.txt)** - Quick reference for:
+  - Official repository URLs
+  - Update commands
+  - tvOS 12.1.2 specific fixes
+
 ## Quick Start
+
+### Jailbreak Options
+
+Choose the best jailbreak for your tvOS version:
+
+#### Checkra1n (tvOS 12.0-13.2)
+- Best for tvOS 12.0-13.2
+- Requires Mac or Linux
+- May need troubleshooting on tvOS 12.1.2
+
+#### ChimeraTV (tvOS 12.0-12.4)
+- Better for tvOS 12.1.2
+- Works on Apple TV 4 and 4K
+- Includes Sileo and Nito TV
 
 ### For Jailbreaking and Installing Nito TV
 
 1. Read the complete guide: [CHECKRA1N_NITOTV_GUIDE.md](CHECKRA1N_NITOTV_GUIDE.md)
-2. Official Nito TV Repository: `https://nitosoft.com/atv/`
-3. Official Checkra1n: https://checkra.in/
+2. **Checkra1n**: https://checkra.in/
+3. **ChimeraTV**: https://chimera.coolstar.org/
+4. Official Nito TV Repository: `https://nitosoft.com/atv/` or `https://repo.nito.tv/`
+
+### Updating Nito TV
+
+If your Nito TV is outdated:
+
+**Method 1** - Within Nito TV app: Settings → Updates → Refresh Sources
+
+**Method 2** - Via SSH:
+```bash
+ssh root@your-apple-tv-ip
+apt-get update && apt-get upgrade
+```
+
+See the [complete guide](CHECKRA1N_NITOTV_GUIDE.md#updating-nito-tv) for detailed instructions.
 
 ### Official Sources Only
 
-⚠️ **IMPORTANT**: Only use the official Nito TV repository:
+⚠️ **IMPORTANT**: Only use official Nito TV repositories:
 ```
 https://nitosoft.com/atv/
+https://repo.nito.tv/
 ```
 
 Avoid unofficial sources, mirrors, or modified repositories to ensure security and stability.
 
+### Additional Repositories
+
+For more packages, see the [sources section](CHECKRA1N_NITOTV_GUIDE.md#additional-verified-repositories) in the complete guide.
+
 ## Compatibility
 
+### Checkra1n
 - **Device**: Apple TV 4 (HD) - 4th Generation
 - **tvOS**: 12.0 - 13.2
-- **Jailbreak**: checkra1n 0.12.0+
+- **Note**: tvOS 12.1.2 may require troubleshooting (see guide)
+
+### ChimeraTV
+- **Device**: Apple TV 4 (HD) and Apple TV 4K
+- **tvOS**: 12.0 - 12.2 and 12.4
+- **Better compatibility** with tvOS 12.1.2
 
 ## Resources
 
 - [Complete Checkra1n & Nito TV Guide](CHECKRA1N_NITOTV_GUIDE.md)
+- [Quick Reference: Sources & Updates](NITOTV_SOURCES.txt)
 - [Official Checkra1n Website](https://checkra.in/)
+- [Official ChimeraTV Website](https://chimera.coolstar.org/)
 - [iOS Guide for Apple TV](https://ios.cfw.guide/installing-checkra1n-tv/)
+- [ChimeraTV Guide](https://ios.cfw.guide/installing-chimeratv/)
 - [Nito TV Official Repository](https://nitosoft.com/atv/)
 
 ## Disclaimer

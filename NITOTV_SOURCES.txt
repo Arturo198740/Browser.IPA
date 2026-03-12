@@ -1,40 +1,113 @@
-OFFICIAL NITO TV SOURCES FOR CHECKRA1N APPLE TV 4 JAILBREAK
-=============================================================
+OFFICIAL NITO TV SOURCES FOR APPLE TV 4 JAILBREAK
+==================================================
 
-OFFICIAL NITO TV REPOSITORY (Use this only):
+PRIMARY OFFICIAL SOURCES:
 https://nitosoft.com/atv/
+https://repo.nito.tv/
 
 INSTALLATION SCRIPT:
 http://nitosoft.com/ATV4/installNTV.sh
 
-OFFICIAL CHECKRA1N:
-https://checkra.in/
+==================================================
+JAILBREAK OPTIONS:
+==================================================
 
+CHECKRA1N (tvOS 12.0-13.2):
+https://checkra.in/
+https://checkra.in/releases/
+
+CHIMERATV (tvOS 12.0-12.4):
+https://chimera.coolstar.org/
+
+==================================================
+ADDITIONAL VERIFIED REPOSITORIES:
+==================================================
+
+For Checkra1n:
+- Official Nito TV: https://nitosoft.com/atv/ or https://repo.nito.tv/
+- BigBoss (Legacy): http://apt.thebigboss.org/repofiles/cydia/
+
+For Chimera/Sileo:
+- Official Nito TV: https://repo.nito.tv/
+- Sileo default sources (pre-configured)
+
+Community Repos:
+- GitHub Master List: https://github.com/mikekalaf/iOS-Jailbreak-Master-Repository
+  (Check "tvOS Repos" section)
+
+==================================================
+UPDATING NITO TV:
+==================================================
+
+Method 1 - Within Nito TV App:
+1. Launch Nito TV
+2. Go to Settings/Updates
+3. Refresh Sources
+4. Install available updates
+
+Method 2 - Via SSH:
+ssh root@your-apple-tv-ip
+apt-get update
+apt-get upgrade
+
+Method 3 - Reinstall:
+ssh root@your-apple-tv-ip
+wget http://nitosoft.com/ATV4/installNTV.sh
+chmod +x installNTV.sh
+./installNTV.sh
+
+==================================================
+TVOS 12.1.2 SPECIFIC FIXES:
+==================================================
+
+If checkra1n doesn't work on tvOS 12.1.2:
+1. Use USB-A to USB-C cable (NOT USB-C to USB-C)
+2. Download latest checkra1n 0.12.4+ from releases page
+3. Try ChimeraTV instead (better compatibility with 12.1.2)
+4. Connect directly without USB hubs
+5. Try different USB ports or computers
+
+==================================================
 DOCUMENTATION RESOURCES:
+==================================================
+
+Checkra1n Guides:
 https://ios.cfw.guide/installing-checkra1n-tv/
 https://ios.cfw.guide/installing-checkra1n-tv/macos/
 
-=============================================================
-IMPORTANT SECURITY NOTES:
-=============================================================
+ChimeraTV Guide:
+https://ios.cfw.guide/installing-chimeratv/
 
-1. ONLY use the official Nito TV repository listed above
+==================================================
+IMPORTANT SECURITY NOTES:
+==================================================
+
+1. ONLY use official Nito TV repositories listed above
 2. NEVER add unofficial mirrors or modified repositories
 3. Change default SSH password (alpine) immediately after jailbreak
-4. Keep checkra1n and Nito TV updated to latest versions
+4. Keep checkra1n/ChimeraTV and Nito TV updated
 5. Only install packages from trusted developers
+6. Avoid piracy repositories
 
-=============================================================
+==================================================
 VERIFIED COMPATIBILITY:
-=============================================================
+==================================================
 
-Device: Apple TV 4 (HD) - 4th Generation (A1625)
-tvOS Versions: 12.0 through 13.2
-Jailbreak Tool: checkra1n 0.12.0 or newer
+Checkra1n:
+- Device: Apple TV 4 (HD) 4th Gen (A1625)
+- tvOS: 12.0 - 13.2
+- Note: tvOS 12.1.2 requires troubleshooting
 
-=============================================================
+ChimeraTV:
+- Device: Apple TV 4 (HD) and Apple TV 4K
+- tvOS: 12.0 - 12.2 and 12.4
+- Better compatibility with tvOS 12.1.2
 
-For complete installation instructions, see CHECKRA1N_NITOTV_GUIDE.md
+==================================================
 
-WARNING: Apple TV 4K models are NOT compatible with checkra1n
+For complete installation and update instructions, see:
+CHECKRA1N_NITOTV_GUIDE.md
+
+WARNING: Apple TV 4K 6th Gen has limited jailbreak support
 WARNING: Jailbreaking voids warranty and may violate TOS
+WARNING: Use only official sources to avoid malware

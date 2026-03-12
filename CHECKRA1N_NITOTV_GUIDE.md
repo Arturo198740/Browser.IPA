@@ -6,8 +6,10 @@ This guide provides comprehensive instructions for jailbreaking Apple TV 4 (HD) 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Official Nito TV Repository Source](#official-nito-tv-repository-source)
+- [Jailbreak Options](#jailbreak-options)
 - [Step-by-Step Jailbreak Instructions](#step-by-step-jailbreak-instructions)
 - [Installing Nito TV](#installing-nito-tv)
+- [Updating Nito TV](#updating-nito-tv)
 - [Adding Sources to Nito TV](#adding-sources-to-nito-tv)
 - [Security Best Practices](#security-best-practices)
 - [Troubleshooting](#troubleshooting)
@@ -53,21 +55,65 @@ https://nitosoft.com/atv/
 
 ---
 
+## Jailbreak Options
+
+### Checkra1n (Recommended for tvOS 12.0-13.2)
+
+**Best for**: Apple TV 4 (HD) on tvOS 12.0-13.2
+
+**Pros**:
+- Stable and well-tested
+- Active community support
+- Works with USB connection
+- Free and open source
+
+**Cons**:
+- Requires Mac or Linux computer
+- USB-C cable needed
+- May have issues with tvOS 12.1.2 (see troubleshooting below)
+
+### ChimeraTV (Alternative for tvOS 12.0-12.4)
+
+**Best for**: Apple TV 4 (HD) and Apple TV 4K on tvOS 12.0-12.2 and 12.4
+
+**Pros**:
+- Works on both Apple TV 4 and 4K
+- Supports slightly newer tvOS versions (up to 12.4)
+- Can be sideloaded with tools like Sideloadly
+- Comes with Sileo package manager and includes Nito TV
+
+**Cons**:
+- More complex installation process
+- Requires sideloading tools
+- Community support smaller than checkra1n
+
+**Official source**: https://chimera.coolstar.org/
+
+### Palera1n (For Newer tvOS)
+
+**Best for**: Newer tvOS versions (up to tvOS 18.2)
+
+**Note**: Still in development for Apple TV. If you're on tvOS 14+ or tvOS 17-18.x, consider waiting for palera1n or other emerging jailbreaks that support newer firmware.
+
+---
+
 ## Step-by-Step Jailbreak Instructions
 
-### Step 1: Download Checkra1n
+### Option A: Checkra1n Jailbreak
+
+#### Step 1: Download Checkra1n
 
 1. Visit the official checkra1n website: https://checkra.in/
 2. Download the latest version for your operating system (macOS or Linux)
 3. For detailed platform-specific instructions, see: https://ios.cfw.guide/installing-checkra1n-tv/macos/
 
-### Step 2: Prepare Your Apple TV 4
+#### Step 2: Prepare Your Apple TV 4
 
 1. Connect your Apple TV 4 to your computer using a USB-C cable
 2. Launch the checkra1n application on your computer
 3. Follow the on-screen instructions to put your Apple TV into DFU (Device Firmware Update) mode
 
-### Step 3: Enter DFU Mode
+#### Step 3: Enter DFU Mode
 
 The checkra1n tool will guide you through entering DFU mode:
 1. Disconnect the power cable from your Apple TV
@@ -75,12 +121,33 @@ The checkra1n tool will guide you through entering DFU mode:
 3. Hold the Menu and Volume Down buttons
 4. Follow the prompts in checkra1n
 
-### Step 4: Run the Jailbreak
+#### Step 4: Run the Jailbreak
 
 1. Click "Start" in the checkra1n application
 2. Wait for the jailbreak process to complete (usually 2-5 minutes)
 3. Your Apple TV will reboot automatically
 4. The checkra1n loader app should appear on your home screen
+
+### Option B: ChimeraTV Jailbreak
+
+#### Step 1: Download ChimeraTV IPA
+
+1. Visit the official Chimera website: https://chimera.coolstar.org/
+2. Download the ChimeraTV IPA file for Apple TV
+
+#### Step 2: Sideload ChimeraTV
+
+1. Use a sideloading tool like Sideloadly or AltStore
+2. Connect your Apple TV to your computer
+3. Follow the sideloading tool's instructions to install the ChimeraTV IPA on your Apple TV
+
+#### Step 3: Run ChimeraTV
+
+1. Open the ChimeraTV app on your Apple TV
+2. Tap "Jailbreak" button
+3. Wait for the process to complete (your Apple TV will reboot)
+4. Re-open ChimeraTV and run it again if prompted
+5. Upon successful jailbreak, Nito TV and Sileo will appear on your home screen
 
 ---
 
@@ -136,6 +203,83 @@ Some versions of checkra1n include built-in Nito TV installation:
 
 ---
 
+## Updating Nito TV
+
+### Why Update Nito TV?
+
+Keeping Nito TV updated ensures:
+- Latest features and improvements
+- Bug fixes and stability improvements
+- Compatibility with newer packages
+- Security patches
+
+### Method 1: Update Within Nito TV App (Recommended)
+
+1. **Launch Nito TV** from your Apple TV home screen
+2. **Navigate to Settings or Updates** section in the app
+3. **Refresh Sources**: Look for a "Refresh" or "Reload" option to update repository information
+4. **Check for Updates**: The app should display if Nito TV itself has an update available
+5. **Install Update**: Select the update option and wait for it to complete
+6. **Reboot if needed**: Your Apple TV may require a reboot after updating
+
+### Method 2: Update via SSH
+
+If the in-app update doesn't work or you prefer command-line control:
+
+1. **SSH into your Apple TV**
+   ```bash
+   ssh root@your-apple-tv-ip
+   ```
+
+2. **Update Package Lists**
+   ```bash
+   apt-get update
+   ```
+
+3. **Upgrade All Packages** (including Nito TV)
+   ```bash
+   apt-get upgrade
+   ```
+
+4. **Or Update Only Nito TV**
+   ```bash
+   apt-get install --only-upgrade nitotv
+   ```
+
+5. **Reboot Apple TV**
+   ```bash
+   reboot
+   ```
+
+### Method 3: Reinstall Nito TV (If Updates Fail)
+
+If neither method works, reinstall Nito TV:
+
+```bash
+ssh root@your-apple-tv-ip
+wget http://nitosoft.com/ATV4/installNTV.sh
+chmod +x installNTV.sh
+./installNTV.sh
+```
+
+### Troubleshooting Updates
+
+**Update fails with "Unable to locate package"**:
+- Run `apt-get update` first to refresh repository lists
+- Check your internet connection
+- Verify repository sources are correctly configured
+
+**Nito TV crashes after update**:
+- Reboot your Apple TV
+- If persistent, reinstall using Method 3
+
+**"Sources are outdated" message**:
+- This is common with older Nito TV versions
+- Update Nito TV using Method 2 or 3
+- Add updated sources (see next section)
+
+---
+
 ## Adding Sources to Nito TV
 
 ### Accessing Nito TV
@@ -149,6 +293,39 @@ Nito TV comes pre-configured with the official repository:
 ```
 https://nitosoft.com/atv/
 ```
+
+Or alternatively:
+```
+https://repo.nito.tv/
+```
+
+### Additional Verified Repositories
+
+If you need more packages, you can add these verified repositories:
+
+#### For Checkra1n Jailbreak:
+- **Official Nito TV**: `https://nitosoft.com/atv/` or `https://repo.nito.tv/`
+- **BigBoss (Legacy)**: `http://apt.thebigboss.org/repofiles/cydia/` (may contain Apple TV utilities)
+
+#### For Chimera/Sileo:
+- **Official Nito TV**: `https://repo.nito.tv/`
+- **Chimera/Sileo Default**: Pre-configured with ChimeraTV installation
+
+#### Community Repos (Use with Caution):
+For a comprehensive list of additional repositories, check:
+- [iOS-Jailbreak-Master-Repository](https://github.com/mikekalaf/iOS-Jailbreak-Master-Repository) - Look under "tvOS Repos" section
+- Always verify repos are legitimate before adding
+- Avoid piracy repos
+
+### How to Add a Source in Nito TV
+
+1. Launch Nito TV
+2. Navigate to **Sources** or **Manage Sources**
+3. Select **Add Source** or **Edit**
+4. Enter the repository URL
+5. Tap **Add** or **Done**
+6. Wait for Nito TV to refresh the source
+7. Browse newly available packages
 
 ### Managing Sources in Nito TV
 
@@ -209,6 +386,43 @@ passwd
 
 ## Troubleshooting
 
+### tvOS 12.1.2 Specific Issues with Checkra1n
+
+**Problem**: Checkra1n doesn't work or fails on tvOS 12.1.2
+
+**Solutions**:
+
+1. **Use USB-A to USB-C Cable** (Not USB-C to USB-C)
+   - Many users report success with USB-A to USB-C cables
+   - USB-C to USB-C connections often fail
+   - Try different cables if one doesn't work
+
+2. **Use Latest Checkra1n Version**
+   - Download checkra1n 0.12.4 beta or newer from https://checkra.in/releases/
+   - Older versions may have compatibility issues with tvOS 12.1.2
+
+3. **DFU Mode Entry Problems**
+   - If stuck in DFU mode (slow blinking LED):
+     - Press and hold Menu + Play/Pause buttons together to force restart
+     - Disconnect USB and power, then reconnect
+   - Try entering DFU mode multiple times
+   - Follow on-screen prompts carefully
+
+4. **Direct USB Connection**
+   - Avoid USB hubs or adapters
+   - Connect directly to your Mac's USB port
+   - Try different USB ports on your computer
+
+5. **Mac-Specific Issues**
+   - Some macOS versions have USB communication issues
+   - Try on a different Mac if available
+   - Linux may work better in some cases (use Odysseyn1x live USB)
+
+6. **Alternative: Use ChimeraTV Instead**
+   - ChimeraTV officially supports tvOS 12.0-12.4
+   - May work better on tvOS 12.1.2 than checkra1n
+   - See "Option B: ChimeraTV Jailbreak" section above
+
 ### Jailbreak Won't Complete
 - Ensure you're using the latest checkra1n version
 - Verify your tvOS version is compatible (12.0-13.2)
@@ -250,9 +464,13 @@ passwd
 
 ### Official Links
 - **Checkra1n Official**: https://checkra.in/
+- **Checkra1n Releases**: https://checkra.in/releases/
+- **ChimeraTV Official**: https://chimera.coolstar.org/
 - **Nito TV Official**: https://nitosoft.com/atv/
+- **Nito TV Repository**: https://repo.nito.tv/
 - **iOS Guide for Apple TV**: https://ios.cfw.guide/installing-checkra1n-tv/
 - **macOS-specific Guide**: https://ios.cfw.guide/installing-checkra1n-tv/macos/
+- **ChimeraTV Guide**: https://ios.cfw.guide/installing-chimeratv/
 
 ### Community Resources
 - **r/Jailbreak Subreddit**: For community support and discussions
@@ -274,17 +492,34 @@ passwd
 ## Compatibility Information
 
 ### Supported Apple TV Models
+
+#### Checkra1n:
 - Apple TV 4 (HD) - 4th Generation
 - Model: A1625 (2015)
 
+#### ChimeraTV:
+- Apple TV 4 (HD) - 4th Generation
+- Apple TV 4K - 5th Generation (A1842)
+
 ### Supported tvOS Versions
+
+#### Checkra1n:
 - tvOS 12.0 - 13.2 (with checkra1n 0.12.0+)
+- tvOS 12.1.2 supported but may require troubleshooting (see above)
 - Check https://checkra.in/ for latest compatibility
 
+#### ChimeraTV:
+- tvOS 12.0 - 12.2
+- tvOS 12.4
+- Better compatibility on tvOS 12.1.2 than checkra1n
+
+#### Palera1n (Future):
+- tvOS 14+ through 18.2 (in development)
+
 ### Not Currently Supported
-- Apple TV 4K (5th Generation) - Not compatible with checkra1n
-- Apple TV 4K (6th Generation) - Not compatible with checkra1n
-- tvOS 14+ - Limited or no support
+- Apple TV 4K (6th Generation) - Limited jailbreak options
+- tvOS 13.3 - 13.x - Limited support
+- tvOS 14+ - Wait for palera1n or other emerging jailbreaks
 
 ---
 
@@ -312,7 +547,16 @@ Found an issue or have improvements? This guide is maintained for the Apple TV j
 
 ## Changelog
 
-### 2026-03-12
+### 2026-03-12 (Update 2)
+- Added ChimeraTV jailbreak option for tvOS 12.0-12.4
+- Included Nito TV update instructions (in-app and SSH methods)
+- Added detailed troubleshooting for tvOS 12.1.2 checkra1n issues
+- Included additional repository sources for Chimera and Nito TV
+- Added instructions for updating outdated Nito TV installations
+- Expanded compatibility information with ChimeraTV and palera1n
+- Added community repository sources (with safety warnings)
+
+### 2026-03-12 (Initial)
 - Initial comprehensive guide created
 - Added official Nito TV source information
 - Included security best practices
