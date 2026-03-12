@@ -74,9 +74,16 @@ From your computer (not the Apple TV), transfer the IPA file using SCP:
 # Navigate to where your IPA file is located (e.g., Desktop)
 cd ~/Desktop
 
-# Transfer IPA to Apple TV
+# Transfer IPA to Apple TV (IMPORTANT: include :/var/root/ at the end)
 scp "Browser new.ipa" root@your-apple-tv-ip:/var/root/
+
+# Example with actual IP:
+scp "Browser new.ipa" root@192.168.1.193:/var/root/
 ```
+
+**IMPORTANT**: The SCP command requires a colon (`:`) followed by the destination path. Common mistakes:
+- ❌ Wrong: `scp "Browser new.ipa" root@192.168.1.193` (missing `:` and path)
+- ✅ Correct: `scp "Browser new.ipa" root@192.168.1.193:/var/root/`
 
 **Note**: If your filename has spaces, make sure to use quotes around it.
 
@@ -349,22 +356,41 @@ find /Applications/Browser.app -type f -perm +111 -exec chmod 755 {} \;
 
 ### Transfer Failed / SCP Issues
 
-If SCP fails:
+If SCP fails or doesn't work as expected:
+
+**Common Error: Missing destination path**
+
+If your SCP command runs but nothing happens, you likely forgot the destination path:
+
+```bash
+# ❌ WRONG - Missing colon and path (command completes but doesn't transfer)
+scp "Browser new.ipa" root@192.168.1.193
+
+# ✅ CORRECT - Include :path after the IP
+scp "Browser new.ipa" root@192.168.1.193:/var/root/
+```
+
+The colon (`:`) is required to separate the host from the remote path. Without it, SCP thinks you're trying to copy to a local file named `root@192.168.1.193`.
+
+**Other SCP troubleshooting options:**
 
 ```bash
 # Option 1: Use alternate port (if SSH is on different port)
 scp -P 22 "Browser new.ipa" root@your-apple-tv-ip:/var/root/
 
-# Option 2: Use SFTP
+# Option 2: Verbose mode to see what's happening
+scp -v "Browser new.ipa" root@your-apple-tv-ip:/var/root/
+
+# Option 3: Use SFTP instead
 sftp root@your-apple-tv-ip
 put "Browser new.ipa" /var/root/
 quit
 
-# Option 3: Use curl/wget (if hosted online)
+# Option 4: Use curl/wget (if hosted online)
 ssh root@your-apple-tv-ip
 curl -O http://your-server/Browser_new.ipa
 
-# Option 4: Use Python simple HTTP server
+# Option 5: Use Python simple HTTP server
 # On your computer (where IPA file is):
 python3 -m http.server 8000
 # Then on Apple TV:

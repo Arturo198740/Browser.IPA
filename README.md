@@ -86,8 +86,11 @@ To install the browser IPA files from this repository on your jailbroken Apple T
 
 **Quick Method** - Via terminal:
 ```bash
-# 1. Transfer IPA to Apple TV
+# 1. Transfer IPA to Apple TV (IMPORTANT: include :/var/root/ at end)
 scp "Browser new.ipa" root@your-apple-tv-ip:/var/root/
+
+# Example with actual IP:
+scp "Browser new.ipa" root@192.168.1.193:/var/root/
 
 # 2. SSH in and install with ldid
 ssh root@your-apple-tv-ip
@@ -105,6 +108,10 @@ cp -r *.app /Applications/
 chmod -R 755 /Applications/*.app
 uicache -a && killall -9 SpringBoard
 ```
+
+**Common SCP mistake**: Don't forget the colon and path!
+- ❌ Wrong: `scp "file.ipa" root@192.168.1.193`
+- ✅ Correct: `scp "file.ipa" root@192.168.1.193:/var/root/`
 
 See the [IPA Installation Guide](IPA_INSTALLATION_GUIDE.md) for complete instructions, troubleshooting, and alternative methods.
 
