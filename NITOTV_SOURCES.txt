@@ -1,0 +1,40 @@
+OFFICIAL NITO TV SOURCES FOR CHECKRA1N APPLE TV 4 JAILBREAK
+=============================================================
+
+OFFICIAL NITO TV REPOSITORY (Use this only):
+https://nitosoft.com/atv/
+
+INSTALLATION SCRIPT:
+http://nitosoft.com/ATV4/installNTV.sh
+
+OFFICIAL CHECKRA1N:
+https://checkra.in/
+
+DOCUMENTATION RESOURCES:
+https://ios.cfw.guide/installing-checkra1n-tv/
+https://ios.cfw.guide/installing-checkra1n-tv/macos/
+
+=============================================================
+IMPORTANT SECURITY NOTES:
+=============================================================
+
+1. ONLY use the official Nito TV repository listed above
+2. NEVER add unofficial mirrors or modified repositories
+3. Change default SSH password (alpine) immediately after jailbreak
+4. Keep checkra1n and Nito TV updated to latest versions
+5. Only install packages from trusted developers
+
+=============================================================
+VERIFIED COMPATIBILITY:
+=============================================================
+
+Device: Apple TV 4 (HD) - 4th Generation (A1625)
+tvOS Versions: 12.0 through 13.2
+Jailbreak Tool: checkra1n 0.12.0 or newer
+
+=============================================================
+
+For complete installation instructions, see CHECKRA1N_NITOTV_GUIDE.md
+
+WARNING: Apple TV 4K models are NOT compatible with checkra1n
+WARNING: Jailbreaking voids warranty and may violate TOS
