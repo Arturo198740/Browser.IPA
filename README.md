@@ -24,6 +24,13 @@ This repository contains browser IPA files for Apple TV 4 and comprehensive docu
   - Security best practices
   - Troubleshooting common issues
 
+- **[IPA_INSTALLATION_GUIDE.md](IPA_INSTALLATION_GUIDE.md)** - Complete guide for:
+  - **Installing IPA files via terminal on jailbroken Apple TV**
+  - Using ldid to sign IPA files
+  - Transferring files with SCP
+  - Installing browser IPAs included in this repository
+  - Troubleshooting installation issues
+
 - **[NITOTV_SOURCES.txt](NITOTV_SOURCES.txt)** - Quick reference for:
   - Official repository URLs
   - Update commands
@@ -73,6 +80,28 @@ nano /etc/apt/sources.list.d/nito.list
 
 See the [complete guide](CHECKRA1N_NITOTV_GUIDE.md#updating-nito-tv) for detailed instructions.
 
+### Installing IPA Files on Jailbroken Apple TV
+
+To install the browser IPA files from this repository on your jailbroken Apple TV:
+
+**Quick Method** - Via terminal:
+```bash
+# 1. Transfer IPA to Apple TV
+scp "Browser new.ipa" root@your-apple-tv-ip:/var/root/
+
+# 2. SSH in and install with ldid
+ssh root@your-apple-tv-ip
+apt-get install ldid    # Install ldid if needed
+unzip "Browser new.ipa" -d /tmp/install/
+cd /tmp/install/Payload
+ldid -S *.app/*         # Sign the app
+cp -r *.app /Applications/
+chmod -R 755 /Applications/*.app
+uicache -a && killall -9 SpringBoard
+```
+
+See the [IPA Installation Guide](IPA_INSTALLATION_GUIDE.md) for complete instructions, troubleshooting, and alternative methods.
+
 ### Official Sources Only
 
 ⚠️ **IMPORTANT**: Only use official Nito TV repositories:
@@ -102,6 +131,7 @@ For more packages, see the [sources section](CHECKRA1N_NITOTV_GUIDE.md#additiona
 ## Resources
 
 - [Complete Checkra1n & Nito TV Guide](CHECKRA1N_NITOTV_GUIDE.md)
+- [IPA Installation Guide](IPA_INSTALLATION_GUIDE.md) - **NEW: Install browser IPAs via terminal**
 - [Quick Reference: Sources & Updates](NITOTV_SOURCES.txt)
 - [Official Checkra1n Website](https://checkra.in/)
 - [Official ChimeraTV Website](https://chimera.coolstar.org/)
