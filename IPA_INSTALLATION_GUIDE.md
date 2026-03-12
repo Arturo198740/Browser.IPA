@@ -6,10 +6,28 @@ This guide explains how to install IPA files (like Browser.ipa) on a jailbroken 
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
+- [Quick Fix: ldid Not Available](#quick-fix-ldid-not-available)
 - [Method 1: Install IPA with ldid (Recommended)](#method-1-install-ipa-with-ldid-recommended)
 - [Method 2: Install Using AppSync](#method-2-install-using-appsync)
 - [Troubleshooting](#troubleshooting)
 - [Common Issues](#common-issues)
+
+---
+
+## Quick Fix: ldid Not Available
+
+If you're getting **"Unable to locate package ldid"** when trying to `apt-get install ldid`, use this quick fix:
+
+```bash
+# Download and install ldid manually
+curl -L -O https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_2.1.5-procursus7_iphoneos-arm.deb
+dpkg -i ldid_2.1.5-procursus7_iphoneos-arm.deb
+
+# Verify it works
+ldid -V
+```
+
+If curl doesn't work, see the [ldid troubleshooting section](#ldid-not-found) for more methods.
 
 ---
 
@@ -37,12 +55,16 @@ First, SSH into your Apple TV and install ldid:
 # SSH into your Apple TV
 ssh root@your-apple-tv-ip
 
-# Install ldid (if not already installed)
+# Update package lists first
 apt-get update
+
+# Try to install ldid from repositories
 apt-get install ldid
 ```
 
-If you get SSL certificate errors, see the [SSL troubleshooting section](#ssl-certificate-errors).
+**If you get "Unable to locate package ldid"**, ldid is not in your default repositories. See the [ldid installation alternatives](#ldid-not-found) below for manual installation methods.
+
+**If you get SSL certificate errors**, see the [SSL troubleshooting section](#ssl-certificate-errors).
 
 ### Step 2: Transfer IPA File to Apple TV
 
@@ -186,18 +208,61 @@ See the main [CHECKRA1N_NITOTV_GUIDE.md](CHECKRA1N_NITOTV_GUIDE.md#ssl-certifica
 
 ### ldid Not Found
 
-If ldid is not available via apt-get:
+If ldid is not available via apt-get (error: "Unable to locate package ldid"), you need to install it manually. Here are multiple methods:
+
+**Method 1: Download Pre-compiled ldid Binary (Easiest)**
 
 ```bash
-# Download ldid manually
-curl -O http://apt.saurik.com/debs/ldid_2.1.2-1_iphoneos-arm.deb
-dpkg -i ldid_2.1.2-1_iphoneos-arm.deb
+# Download pre-compiled ldid for ARM
+curl -L -O https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_2.1.5-procursus7_iphoneos-arm.deb
+dpkg -i ldid_2.1.5-procursus7_iphoneos-arm.deb
 
-# Or try alternative source
-curl -O https://github.com/ProcursusTeam/ldid/releases/latest/download/ldid
-chmod +x ldid
-mv ldid /usr/bin/
+# Or if curl fails, try wget
+wget https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_2.1.5-procursus7_iphoneos-arm.deb
+dpkg -i ldid_2.1.5-procursus7_iphoneos-arm.deb
+
+# Verify installation
+ldid -V
 ```
+
+**Method 2: Use Saurik's Repository**
+
+```bash
+# Add Saurik's repository
+echo "deb http://apt.saurik.com/ ./" > /etc/apt/sources.list.d/saurik.list
+
+# Update and install
+apt-get update
+apt-get install ldid
+
+# If SSL errors, use HTTP instead of HTTPS in the repository URL
+```
+
+**Method 3: Download Binary Directly**
+
+```bash
+# Download standalone ldid binary
+curl -L -O https://github.com/ProcursusTeam/ldid/releases/latest/download/ldid
+chmod +x ldid
+mv ldid /usr/bin/ldid
+
+# Or use a known working version
+curl -L -O http://apt.saurik.com/debs/ldid_2.1.2-1_iphoneos-arm.deb
+dpkg -i ldid_2.1.2-1_iphoneos-arm.deb
+```
+
+**Method 4: Add Procursus Repository** (for newer jailbreaks)
+
+```bash
+# Add Procursus repository
+echo "deb https://apt.procurs.us/ ./" > /etc/apt/sources.list.d/procursus.list
+
+# Update and install
+apt-get update
+apt-get install ldid
+```
+
+**If all methods fail**, you can still install apps without ldid by using AppSync Unified (see Method 2 below).
 
 ### uicache Command Not Found
 

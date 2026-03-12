@@ -91,7 +91,13 @@ scp "Browser new.ipa" root@your-apple-tv-ip:/var/root/
 
 # 2. SSH in and install with ldid
 ssh root@your-apple-tv-ip
-apt-get install ldid    # Install ldid if needed
+
+# 3. Install ldid if not available
+# If "apt-get install ldid" fails, use:
+curl -L -O https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_2.1.5-procursus7_iphoneos-arm.deb
+dpkg -i ldid_2.1.5-procursus7_iphoneos-arm.deb
+
+# 4. Extract and sign IPA
 unzip "Browser new.ipa" -d /tmp/install/
 cd /tmp/install/Payload
 ldid -S *.app/*         # Sign the app
