@@ -1,2 +1,2 @@
 # Browser.IPA 
-More premium IPA file avalable in my site https://tvos-ipa-baza.vercel.app
+More premium IPA files avalable      https://tvos-ipa-baza.vercel.app
